@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <fx:include source="../component/Logo.fxml" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Loading">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="60.0" />
+               </VBox.margin>
+            </Text>
+            <ProgressBar fx:id="wtf" prefHeight="12.0" prefWidth="401.0" />
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <Text fill="#ffffff0c" strokeType="OUTSIDE" strokeWidth="0.0" text="dontsleep404" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" fillWidth="false" prefHeight="674.0" prefWidth="409.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <fx:include source="../component/Logo.fxml" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
+         <font>
+            <Font name="Noto Sans Bold" size="28.0" />
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="255.0">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Text>
+      <TextField fx:id="username" prefWidth="255.0">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </TextField>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="255.0">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Text>
+      <PasswordField fx:id="password" prefWidth="255.0">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </PasswordField>
+      <Button defaultButton="true" mnemonicParsing="false" onAction="#handleLogin" prefWidth="255.0" text="Login" fx:id="login">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Button>
+      <Separator prefHeight="25.0" prefWidth="185.0" />
+      <Button mnemonicParsing="false" onAction="#handleLoginAsGuest" prefWidth="255.0" text="Login as Guest" />
+   </children>
+</VBox>
