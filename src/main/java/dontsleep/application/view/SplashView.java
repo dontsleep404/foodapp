@@ -2,54 +2,43 @@ package dontsleep.application.view;
 
 import java.io.IOException;
 
+import dontsleep.application.GlobalClient;
 import dontsleep.application.helper.SimpleComponent;
 import dontsleep.application.helper.SimpleStage;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.ProgressBar;
-import javafx.stage.Stage;
+import javafx.scene.text.Text;
 
-public class SplashView extends SimpleComponent{
+public class SplashView extends SimpleComponent {
 
     @FXML
-    public ProgressBar wtf;
+    public Text txtStatus;
+
+    private static SplashView instance;
     
-    public SplashView() throws IOException{
+    public SplashView() throws IOException {
         super();
+        instance = this;
         run();
     }
-    public void run(){
-        new Thread(new Runnable(){
-            @Override
-            public void run() {
-                float[] progress = {0};
-                for(int i = 0; i < 100; i++){
-                    try {
-                        Thread.sleep(10);
-                        progress[0] += 0.01;
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    Platform.runLater(new Runnable(){
-                        @Override
-                        public void run() {
-                            wtf.setProgress(progress[0]);
-                        }
-                    });
-                }
-                Platform.runLater(new Runnable(){
-                    @Override
-                    public void run() {
-                        try {
-                            ((Stage) wtf.getScene().getWindow() ).close();
-                            new SimpleStage(new LoginView());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }
-        }).start();
+    public static SplashView getInstance(){
+        return instance;
     }
     
+    @Override
+    public void close() {
+        super.close();
+        instance = null;
+    }
+    public void run() throws IOException {
+        if (GlobalClient.connect()) {
+            txtStatus.setText("Connect Success!");
+            Platform.runLater(() -> {
+                close();
+            });
+            new SimpleStage(new LoginView());
+        } else {
+            txtStatus.setText("Connect Failed!");
+        }
+    }
 }

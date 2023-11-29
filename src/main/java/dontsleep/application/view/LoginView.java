@@ -2,26 +2,61 @@ package dontsleep.application.view;
 
 import java.io.IOException;
 
+import dontsleep.application.GlobalClient;
 import dontsleep.application.helper.SimpleComponent;
 import dontsleep.application.helper.SimpleStage;
+import dontsleep.application.packet.CPacket.CPacketLogin;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 public class LoginView extends SimpleComponent{
+
+    private static LoginView instance;
+
     @FXML
     private Button login;
 
+    @FXML
+    public TextField username;
+
+    @FXML
+    private PasswordField password;
+
     public LoginView() throws IOException {
         super();
+        instance = this;
+    }
+
+    public static LoginView getInstance(){
+        return instance;
+    }
+    
+    @Override
+    public void close() {
+        super.close();
+        instance = null;
     }
 
     public void handleLogin() throws IOException{
-        ((Stage) getScene().getWindow()).close();
-        new SimpleStage(new MenuView());
+        String username = this.username.getText();
+        String password = this.password.getText();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            return;
+        }
+
+        CPacketLogin packet = new CPacketLogin();
+        packet.username = username;
+        packet.password = password;
+
+        GlobalClient.client.sendPacket(packet);
+
     }
-    public void handleLoginAsGuest(){
-        
+    public void handleLoginAsGuest() throws IOException{
+        close();
+        new SimpleStage(new MenuView());
     }
     
 }
