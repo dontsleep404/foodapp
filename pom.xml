@@ -44,6 +44,11 @@
             <scope>system</scope>
             <systemPath>${basedir}/lib/dontsleep.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-javafx</artifactId>
+            <version>12.3.1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

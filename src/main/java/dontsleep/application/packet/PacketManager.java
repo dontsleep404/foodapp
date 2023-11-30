@@ -33,7 +33,7 @@ public class PacketManager extends EventHandle{
 
     @Override
     public void onPacketReceived(DClient arg0, Packet arg1) {
-        System.out.println(arg0.hashCode() + " received " + arg1.getClass().getSimpleName());
+        System.out.println(arg0.hashCode() + " received " + arg1);
         String proc = arg1.getClass().getPackageName() + ".process.Process" + arg1.getClass().getSimpleName();
         try{
             Class<?> c = Class.forName(proc);

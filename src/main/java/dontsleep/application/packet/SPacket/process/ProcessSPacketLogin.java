@@ -2,7 +2,10 @@ package dontsleep.application.packet.SPacket.process;
 
 import java.io.IOException;
 
+import dontsleep.application.GlobalClient;
 import dontsleep.application.helper.SimpleStage;
+import dontsleep.application.model.user.Guest;
+import dontsleep.application.model.user.User;
 import dontsleep.application.packet.SPacket.SPacketLogin;
 import dontsleep.application.packet.process.ProcessPacket;
 import dontsleep.application.view.LoginView;
@@ -20,6 +23,11 @@ public class ProcessSPacketLogin extends ProcessPacket<SPacketLogin> {
         if (getPacket().success) {
             LoginView.getInstance().close();
             try {
+                if (getPacket().role == 0) {
+                    GlobalClient.user = new Guest();
+                } else if (getPacket().role == 1) {
+                    GlobalClient.user = new User(getPacket().username);                    
+                }
                 new SimpleStage(new MenuView());
             } catch (IOException e) {
                 e.printStackTrace();

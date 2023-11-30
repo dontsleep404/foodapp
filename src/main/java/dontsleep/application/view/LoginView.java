@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import dontsleep.application.GlobalClient;
 import dontsleep.application.helper.SimpleComponent;
-import dontsleep.application.helper.SimpleStage;
 import dontsleep.application.packet.CPacket.CPacketLogin;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -55,8 +54,10 @@ public class LoginView extends SimpleComponent{
 
     }
     public void handleLoginAsGuest() throws IOException{
-        close();
-        new SimpleStage(new MenuView());
+        CPacketLogin packet = new CPacketLogin();
+        packet.isGuest = true;
+        
+        GlobalClient.client.sendPacket(packet);
     }
     
 }
