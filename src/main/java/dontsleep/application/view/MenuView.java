@@ -26,11 +26,13 @@ public class MenuView extends SimpleComponent{
     
     private static MenuView instance;
 
+    public CTabPane cTabPane;
+
     public MenuView() throws IOException {
         super();
         this.txtUser.setText("User : " + GlobalClient.user.getUsername());
         this.txtRole.setText("Role : " + GlobalClient.user.getClass().getSimpleName().toUpperCase());
-        CTabPane cTabPane = new CTabPane();
+        cTabPane = new CTabPane();
         gr.add(cTabPane, 1, 0);
         instance = this;
     }

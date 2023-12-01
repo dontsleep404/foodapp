@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="447.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
+         <content>
+            <VBox spacing="10.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="6.0" prefWidth="746.0" spacing="10.0" style="-fx-background-color: #00000011; -fx-border-radius: 20;" VBox.vgrow="NEVER">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2023-12-11 14:20" wrappingWidth="392.625">
+                           <font>
+                              <Font name="Calibri Bold" size="19.0" />
+                           </font>
+                        </Text>
+                        <Pane prefHeight="36.0" prefWidth="8.0" HBox.hgrow="ALWAYS" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="329.999 VND">
+                           <font>
+                              <Font name="Calibri Bold" size="19.0" />
+                           </font>
+                        </Text>
+                        <Button mnemonicParsing="false" text="View">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Calibri Bold" size="17.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <Separator prefWidth="200.0" />
+      <HBox alignment="CENTER_RIGHT">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <Label alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="638.0" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Calibri Bold" size="19.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Label>
+            <Button mnemonicParsing="false" text="View" visible="false">
+               <font>
+                  <Font name="Calibri Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>

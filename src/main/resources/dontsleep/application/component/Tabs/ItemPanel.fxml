@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" onMouseClicked="#onClick" prefHeight="0.0" prefWidth="200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="image" fitHeight="160.0" fitWidth="200.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../img/f1.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="name" style="-fx-text-fill: black;" text="Name" textAlignment="CENTER">
+         <font>
+            <Font name="Calibri Bold" size="25.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Label>
+      <Label fx:id="price" style="-fx-text-fill: black;" text="Price">
+         <font>
+            <Font name="Calibri Bold" size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </VBox.margin>
+      </Label>
+   </children>
+</VBox>

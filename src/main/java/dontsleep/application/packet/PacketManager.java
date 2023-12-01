@@ -2,8 +2,8 @@ package dontsleep.application.packet;
 
 import java.util.ArrayList;
 
-import dontsleep.application.packet.CPacket.CPacketLogin;
-import dontsleep.application.packet.SPacket.SPacketLogin;
+import dontsleep.application.packet.CPacket.*;
+import dontsleep.application.packet.SPacket.*;
 import dontsleep404.library.DClient;
 import dontsleep404.library.event.EventHandle;
 import dontsleep404.library.event.EventPacket;
@@ -14,9 +14,11 @@ public class PacketManager extends EventHandle{
     public PacketManager() {
         super(new ArrayList<Class<? extends Packet>>(){
             {
-                add(SPacketLogin.class);
-
                 add(CPacketLogin.class);
+                add(SPacketLogin.class);
+                add(CPacketInit.class);
+                add(SPacketInit.class);
+
             }
         });
     }
