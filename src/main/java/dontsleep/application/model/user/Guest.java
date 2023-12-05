@@ -1,6 +1,6 @@
 package dontsleep.application.model.user;
 
-public class Guest {
+public class Guest implements IUser{
 
     private String username;
 
@@ -12,12 +12,23 @@ public class Guest {
         return username;
     }
 
-    public boolean canOrder(){
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public boolean canOrder() {
         return true;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    @Override
+    public boolean canAddItem() {
+        return false;
+    }
+
+    @Override
+    public boolean canEditItem() {
+        return false;
     }
 
 }

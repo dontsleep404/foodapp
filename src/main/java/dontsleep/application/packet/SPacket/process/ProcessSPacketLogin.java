@@ -5,6 +5,7 @@ import java.io.IOException;
 import dontsleep.application.GlobalClient;
 import dontsleep.application.helper.SimpleStage;
 import dontsleep.application.model.user.Guest;
+import dontsleep.application.model.user.Staff;
 import dontsleep.application.model.user.User;
 import dontsleep.application.packet.SPacket.SPacketLogin;
 import dontsleep.application.packet.process.ProcessPacket;
@@ -25,9 +26,13 @@ public class ProcessSPacketLogin extends ProcessPacket<SPacketLogin> {
             try {
                 if (getPacket().role == 0) {
                     GlobalClient.user = new Guest();
-                } else if (getPacket().role == 1) {
-                    GlobalClient.user = new User(getPacket().username);                    
                 }
+                if (getPacket().role == 1) {
+                    GlobalClient.user = new User(getPacket().username);                    
+                } 
+                if (getPacket().role == 2) {
+                    GlobalClient.user = new Staff();
+                }                
                 new SimpleStage(new MenuView());
             } catch (IOException e) {
                 e.printStackTrace();

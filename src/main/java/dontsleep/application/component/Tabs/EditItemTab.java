@@ -6,17 +6,21 @@ import java.util.ArrayList;
 
 import dontsleep.application.GlobalClient;
 import dontsleep.application.helper.SimpleComponent;
+import dontsleep.application.model.Item;
 import dontsleep.application.model.ItemType;
-import dontsleep.application.packet.CPacket.CPacketAddItem;
+import dontsleep.application.packet.CPacket.CPacketEditItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class AddItemTab extends SimpleComponent{
+public class EditItemTab extends SimpleComponent{
 
     @FXML
-    private ComboBox<ItemType> item;
+    private ComboBox<Item> items; 
+
+    @FXML
+    private ComboBox<ItemType> itemtypes;
 
     @FXML
     private TextField txtName;
@@ -36,19 +40,46 @@ public class AddItemTab extends SimpleComponent{
     @FXML
     private Label status;
     
-    public AddItemTab() throws IOException {
+    public EditItemTab() throws IOException {
         super();
         updateComboBox();
+        items.valueProperty().addListener((observable, oldValue, newValue) -> {
+            updateSelected();
+        });
     }
     
     public void updateComboBox(){
-        item.getItems().clear();
+        itemtypes.getItems().clear();
         for(ItemType item : GlobalClient.itemTypes){
-            this.item.getItems().add(item);
+            this.itemtypes.getItems().add(item);
+        }
+
+        items.getItems().clear();
+        for(Item item : GlobalClient.items){
+            this.items.getItems().add(item);
         }
     }
 
-    public void add(){
+    public void updateSelected(){
+        if (items.getSelectionModel().getSelectedItem() != null){
+            txtName.setText(items.getSelectionModel().getSelectedItem().name);
+            txtDesc.setText(items.getSelectionModel().getSelectedItem().description);
+            txtPrice.setText(Integer.toString(items.getSelectionModel().getSelectedItem().price));
+            txtImage.setText(items.getSelectionModel().getSelectedItem().image);
+            txtType.clear();
+            itemtypes.getSelectionModel().clearSelection();
+            for(ItemType item : GlobalClient.itemTypes){
+                if (item.id == items.getSelectionModel().getSelectedItem().type){
+                    itemtypes.getSelectionModel().select(item);
+                    break;
+                }
+            }
+        }else{
+            clear();
+        }
+    }
+
+    public void edit(){
         status.setText("");
         ArrayList<String> errors = new ArrayList<>();
         if (txtName.getText().isEmpty()) errors.add("Name cannot be empty");
@@ -65,18 +96,20 @@ public class AddItemTab extends SimpleComponent{
         }catch(NumberFormatException e){
             errors.add("Price must be a number");
         }
-        if (item.getSelectionModel().getSelectedItem() == null && txtType.getText().isEmpty()) errors.add("Item type cannot be empty");
+        if (itemtypes.getSelectionModel().getSelectedItem() == null && txtType.getText().isEmpty()) errors.add("Item type cannot be empty");
 
         if (errors.size() > 0){
             error(errors.get(0));
         }else{
-            CPacketAddItem packet = new CPacketAddItem();
+            CPacketEditItem packet = new CPacketEditItem();
+            packet.isDelete = false;
+            packet.id = items.getSelectionModel().getSelectedItem().id;
             packet.name = txtName.getText();
             packet.description = txtDesc.getText();
             packet.price = Integer.parseInt(txtPrice.getText());
             packet.image = txtImage.getText();
-            if (item.getSelectionModel().getSelectedItem() != null){
-                packet.type = item.getSelectionModel().getSelectedItem().id;
+            if (itemtypes.getSelectionModel().getSelectedItem() != null){
+                packet.type = itemtypes.getSelectionModel().getSelectedItem().id;
             }
             if (!txtType.getText().isEmpty()){
                 packet.n_type = txtType.getText();
@@ -99,6 +132,15 @@ public class AddItemTab extends SimpleComponent{
         txtPrice.clear();
         txtImage.clear();
         txtType.clear();
-        item.getSelectionModel().clearSelection();
+        itemtypes.getSelectionModel().clearSelection();
+    }
+    public void delete(){
+        status.setText("");
+        if (items.getSelectionModel() != null){
+            CPacketEditItem packet = new CPacketEditItem();
+            packet.isDelete = true;
+            packet.id = items.getSelectionModel().getSelectedItem().id;
+            GlobalClient.client.sendPacket(packet);
+        }
     }
 }

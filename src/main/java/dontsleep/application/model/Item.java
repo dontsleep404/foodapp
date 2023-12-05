@@ -19,4 +19,8 @@ public class Item {
         }
         return null;
     }
+    @Override
+    public String toString() {
+        return id + " - " + name;
+    }
 }

@@ -18,7 +18,11 @@ public class PacketManager extends EventHandle{
                 add(SPacketLogin.class);
                 add(CPacketInit.class);
                 add(SPacketInit.class);
-
+                add(CPacketAddItem.class);
+                add(SPacketAddItemRes.class);
+                add(SPacketUpdateMenu.class);
+                add(SPacketEditItemRes.class);
+                add(CPacketEditItem.class);
             }
         });
     }

@@ -35,14 +35,20 @@ public class OrderTab extends SimpleComponent{
 
     public OrderTab() throws IOException {
         super();
-
+        updateTab();
+    }
+    public void updateTab() throws IOException{
+        tabPane.getTabs().clear();
         for(ItemType item : GlobalClient.itemTypes){
+
             Tab tab = new Tab();
             TabContent tabContent = new TabContent(item);
             tab.setText(item.name);
             tab.setContent(tabContent);
 
-            tabPane.getTabs().add(tab);
+            if (tabContent.isHaveItem) {
+                tabPane.getTabs().add(tab);
+            }
         }
     }
     public void setCurrentItem(Item item){
@@ -97,6 +103,8 @@ class TabContent extends SimpleComponent{
     @FXML
     private FlowPane flowPane;
 
+    public boolean isHaveItem = false;
+
     public TabContent(ItemType itemType) throws IOException {
         super();
 
@@ -104,6 +112,7 @@ class TabContent extends SimpleComponent{
             if(item.type == itemType.id){
                 ItemPanel itemPanel = new ItemPanel(item);
                 flowPane.getChildren().add(itemPanel);
+                isHaveItem = true;
             }
         }
     }

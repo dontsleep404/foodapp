@@ -23,6 +23,19 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="901.0" spacing="10.0">
                      <children>
+                        <Label prefHeight="23.0" prefWidth="208.0" text="Item">
+                           <font>
+                              <Font name="Calibri Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="items" prefHeight="36.0" prefWidth="258.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="901.0" spacing="10.0">
+                     <children>
                         <Label prefHeight="23.0" prefWidth="208.0" text="Name">
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
@@ -96,7 +109,7 @@
                               <Font name="Calibri Bold" size="20.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="item" prefHeight="36.0" prefWidth="268.0" />
+                        <ComboBox fx:id="itemtypes" prefHeight="36.0" prefWidth="268.0" />
                         <Label text="or" />
                         <TextField fx:id="txtType" promptText="Ex : Fast Food" HBox.hgrow="ALWAYS">
                            <font>
@@ -121,7 +134,7 @@
                </font>
             </Label>
             <Pane HBox.hgrow="ALWAYS" />
-            <Button cancelButton="true" mnemonicParsing="false" onAction="#clear" text="Clear" textFill="WHITE">
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#delete" text="Delete" textFill="WHITE">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
@@ -129,7 +142,7 @@
                   <Font name="Calibri Bold" size="20.0" />
                </font>
             </Button>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#add" text="Add" textFill="WHITE">
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#edit" text="Update" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="20.0" />
                </font>

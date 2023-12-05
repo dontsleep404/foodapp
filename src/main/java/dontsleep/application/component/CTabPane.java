@@ -2,6 +2,7 @@ package dontsleep.application.component;
 
 import java.io.IOException;
 
+import dontsleep.application.GlobalClient;
 import dontsleep.application.component.Tabs.*;
 import dontsleep.application.helper.SimpleComponent;
 import javafx.fxml.FXML;
@@ -17,18 +18,44 @@ public class CTabPane extends SimpleComponent{
     public BillDetailTab billDetailTab;
     public HistoryTab historyTab;
     public AddItemTab addItemTab;
+    public EditItemTab editItemTab;
 
     public CTabPane() throws IOException {
         super();
-        orderTab = new OrderTab();
-        billDetailTab = new BillDetailTab();
-        historyTab = new HistoryTab();
-        addItemTab = new AddItemTab();
+        // orderTab = new OrderTab();
+        // billDetailTab = new BillDetailTab();
+        // historyTab = new HistoryTab();
+        // addItemTab = new AddItemTab();
+        // editItemTab = new EditItemTab();
 
-        addTab(orderTab, "Order");
-        addTab(billDetailTab, "Bill");
-        addTab(historyTab, "History");
-        addTab(addItemTab, "Add Item");
+        // addTab(orderTab, "Order");
+        // addTab(billDetailTab, "Bill");
+        // addTab(historyTab, "History");
+        // addTab(addItemTab, "Add Item");
+        // addTab(editItemTab, "Edit Item");
+
+        if(GlobalClient.user.canOrder()){
+            orderTab = new OrderTab();
+            addTab(orderTab, "Order");
+
+            billDetailTab = new BillDetailTab();
+            addTab(billDetailTab, "Bill");
+
+            historyTab = new HistoryTab();
+            addTab(historyTab, "History");
+        }
+
+        if(GlobalClient.user.canAddItem()){
+            addItemTab = new AddItemTab();
+            addTab(addItemTab, "Add Item");
+        }
+
+        if(GlobalClient.user.canEditItem()){
+            editItemTab = new EditItemTab();
+            addTab(editItemTab, "Edit Item");
+        }
+
+
     }
 
     public void addTab(SimpleComponent component, String title) throws IOException {
