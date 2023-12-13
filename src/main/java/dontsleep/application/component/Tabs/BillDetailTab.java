@@ -5,6 +5,7 @@ import java.io.IOException;
 import dontsleep.application.GlobalClient;
 import dontsleep.application.helper.SimpleComponent;
 import dontsleep.application.model.Task;
+import dontsleep.application.packet.CPacket.CPacketUpdateOrder;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -64,6 +65,13 @@ public class BillDetailTab extends SimpleComponent {
         TableColumn<Task, String> status1 = new TableColumn<>("Status");
         status1.setCellValueFactory(cellData -> cellData.getValue().status);
 
+        id.setSortable(false);
+        itemName.setSortable(false);
+        quantity.setSortable(false);
+        itemCost.setSortable(false);
+        totalCost.setSortable(false);
+        status1.setSortable(false);
+
         table.getColumns().add(id);
         table.getColumns().add(itemName);
         table.getColumns().add(quantity);
@@ -76,17 +84,32 @@ public class BillDetailTab extends SimpleComponent {
     public void pay(){}
 
     public void accept(){
+        if(table.getSelectionModel().getSelectedItem() == null) return;
 
+        CPacketUpdateOrder packet = new CPacketUpdateOrder();
+        packet.status = CPacketUpdateOrder.EnumOrderStatus.ACCEPTED;
+        packet.taskID = table.getSelectionModel().getSelectedItem().id.get();
+        
+        GlobalClient.client.sendPacket(packet);
     }
     public void cancle(){
+        if(table.getSelectionModel().getSelectedItem() == null) return;
 
+        CPacketUpdateOrder packet = new CPacketUpdateOrder();
+        packet.status = CPacketUpdateOrder.EnumOrderStatus.CANCELED;
+        packet.taskID = table.getSelectionModel().getSelectedItem().id.get();
+
+        GlobalClient.client.sendPacket(packet);
     }
 
     public void updateStatus(int id, String status){
         Task task = find(id);
         if(task != null){
             task.status.set(status);
-        }
+            if (GlobalClient.user.isStaff()){
+                GlobalClient.tasks.remove(task);
+            }
+        }        
     }
     public Task find(int id){
         Task task = null;

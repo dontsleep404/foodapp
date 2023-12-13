@@ -80,6 +80,7 @@ public class EditItemTab extends SimpleComponent{
     }
 
     public void edit(){
+        if (items.getSelectionModel().getSelectedItem() == null) return;
         status.setText("");
         ArrayList<String> errors = new ArrayList<>();
         if (txtName.getText().isEmpty()) errors.add("Name cannot be empty");
