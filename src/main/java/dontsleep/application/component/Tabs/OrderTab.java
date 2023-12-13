@@ -8,6 +8,7 @@ import dontsleep.application.GlobalClient;
 import dontsleep.application.helper.SimpleComponent;
 import dontsleep.application.model.Item;
 import dontsleep.application.model.ItemType;
+import dontsleep.application.packet.CPacket.CPacketOrderItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -94,7 +95,13 @@ public class OrderTab extends SimpleComponent{
         if (currentItem == null) {
             return;
         }
-        System.out.println("add " + quantity.getText() + " " + currentItem.name);
+
+        CPacketOrderItem packet = new CPacketOrderItem();
+        packet.itemID = currentItem.id;
+        packet.quantity = currentQuantity;
+
+        GlobalClient.client.sendPacket(packet);
+
         currentItem = null;
         update();
     }

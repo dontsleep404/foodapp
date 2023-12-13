@@ -23,6 +23,8 @@ public class PacketManager extends EventHandle{
                 add(SPacketUpdateMenu.class);
                 add(SPacketEditItemRes.class);
                 add(CPacketEditItem.class);
+                add(CPacketOrderItem.class);
+                add(SPacketAddItemToBill.class);
             }
         });
     }

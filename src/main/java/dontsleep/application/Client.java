@@ -21,6 +21,12 @@ public class Client extends Application {
         new SimpleStage(new SplashView());
     }
     public static void main(String[] args) {
-        launch();     
+        if (args.length > 0) {
+            GlobalClient.tableId = args[0];
+            launch();  
+        }else{
+            System.out.println("Please input table id");
+            System.exit(0);
+        }      
     }
 }

@@ -49,13 +49,15 @@ public class LoginView extends SimpleComponent{
         CPacketLogin packet = new CPacketLogin();
         packet.username = username;
         packet.password = password;
+        packet.tableId = GlobalClient.tableId;
 
         GlobalClient.client.sendPacket(packet);
 
     }
     public void handleLoginAsGuest() throws IOException{
         CPacketLogin packet = new CPacketLogin();
-        packet.isGuest = true;
+        packet.isGuest = true;        
+        packet.tableId = GlobalClient.tableId;
         
         GlobalClient.client.sendPacket(packet);
     }

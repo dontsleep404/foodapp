@@ -30,6 +30,7 @@ public class MenuView extends SimpleComponent{
 
     public MenuView() throws IOException {
         super();
+        this.txtID.setText("TableID : " + GlobalClient.tableId);
         this.txtUser.setText("User : " + GlobalClient.user.getUsername());
         this.txtRole.setText("Role : " + GlobalClient.user.getClass().getSimpleName().toUpperCase());
         cTabPane = new CTabPane();

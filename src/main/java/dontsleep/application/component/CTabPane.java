@@ -22,18 +22,7 @@ public class CTabPane extends SimpleComponent{
 
     public CTabPane() throws IOException {
         super();
-        // orderTab = new OrderTab();
-        // billDetailTab = new BillDetailTab();
-        // historyTab = new HistoryTab();
-        // addItemTab = new AddItemTab();
-        // editItemTab = new EditItemTab();
-
-        // addTab(orderTab, "Order");
-        // addTab(billDetailTab, "Bill");
-        // addTab(historyTab, "History");
-        // addTab(addItemTab, "Add Item");
-        // addTab(editItemTab, "Edit Item");
-
+        
         if(GlobalClient.user.canOrder()){
             orderTab = new OrderTab();
             addTab(orderTab, "Order");
@@ -44,7 +33,10 @@ public class CTabPane extends SimpleComponent{
             historyTab = new HistoryTab();
             addTab(historyTab, "History");
         }
-
+        if (GlobalClient.user.isStaff()) {
+            billDetailTab = new BillDetailTab();
+            addTab(billDetailTab, "Bill");
+        }
         if(GlobalClient.user.canAddItem()){
             addItemTab = new AddItemTab();
             addTab(addItemTab, "Add Item");

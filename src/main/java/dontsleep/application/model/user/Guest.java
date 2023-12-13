@@ -31,4 +31,9 @@ public class Guest implements IUser{
         return false;
     }
 
+    @Override
+    public boolean isStaff() {
+        return false;
+    }
+
 }

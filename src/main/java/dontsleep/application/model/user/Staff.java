@@ -15,5 +15,15 @@ public class Staff extends Guest {
     public boolean canEditItem() {
         return true;
     }
+
+    @Override
+    public boolean isStaff() {
+        return true;
+    }
+
+    @Override
+    public boolean canOrder() {
+        return false;
+    }
     
 }
