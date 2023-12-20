@@ -1,11 +1,15 @@
 package dontsleep.application.component.Tabs;
 
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import dontsleep.application.GlobalClient;
 import dontsleep.application.helper.SimpleComponent;
+import dontsleep.application.helper.SimpleStage;
 import dontsleep.application.model.Task;
 import dontsleep.application.packet.CPacket.CPacketUpdateOrder;
+import dontsleep.application.view.PayView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -81,7 +85,9 @@ public class BillDetailTab extends SimpleComponent {
         table.setItems(GlobalClient.tasks);
     }   
 
-    public void pay(){}
+    public void pay() throws IOException{
+        new SimpleStage(new PayView());
+    }
 
     public void accept(){
         if(table.getSelectionModel().getSelectedItem() == null) return;
@@ -109,7 +115,17 @@ public class BillDetailTab extends SimpleComponent {
             if (GlobalClient.user.isStaff()){
                 GlobalClient.tasks.remove(task);
             }
-        }        
+        }
+        int cost = 0;
+        for(Task t : GlobalClient.tasks){
+           
+            if (!GlobalClient.user.isStaff() && t.status.get().equals("ACCEPTED")){
+                cost += t.totalCost.get();
+            }
+        }
+        NumberFormat numberFormat = NumberFormat.getInstance(Locale.US);
+        numberFormat.setMaximumFractionDigits(0);
+        txtCost.setText(numberFormat.format(cost));
     }
     public Task find(int id){
         Task task = null;

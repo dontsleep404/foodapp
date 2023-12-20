@@ -7,22 +7,22 @@ import dontsleep.application.helper.SimpleStage;
 import dontsleep.application.model.user.Guest;
 import dontsleep.application.model.user.Staff;
 import dontsleep.application.model.user.User;
-import dontsleep.application.packet.SPacket.SPacketLogin;
+import dontsleep.application.packet.SPacket.SPacketRegister;
 import dontsleep.application.packet.process.ProcessPacket;
-import dontsleep.application.view.LoginView;
 import dontsleep.application.view.MenuView;
+import dontsleep.application.view.RegisterView;
 import dontsleep404.library.DClient;
 
-public class ProcessSPacketLogin extends ProcessPacket<SPacketLogin> {
+public class ProcessSPacketRegister extends ProcessPacket<SPacketRegister>{
 
-    public ProcessSPacketLogin(DClient client, SPacketLogin packet) {
+    public ProcessSPacketRegister(DClient client, SPacketRegister packet) {
         super(client, packet);
     }
 
     @Override
     public void process() {
         if (getPacket().success) {
-            LoginView.getInstance().close();
+            RegisterView.getInstance().close();
             try {
                 if (getPacket().role == 0) {
                     GlobalClient.user = new Guest();
@@ -38,7 +38,7 @@ public class ProcessSPacketLogin extends ProcessPacket<SPacketLogin> {
                 e.printStackTrace();
             }
         }else{
-            LoginView.getInstance().status.setText("Login Failed");
+            RegisterView.getInstance().status.setText(getPacket().error);
         }
     }
     

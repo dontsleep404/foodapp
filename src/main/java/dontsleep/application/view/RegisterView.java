@@ -5,19 +5,15 @@ import java.io.IOException;
 import dontsleep.application.GlobalClient;
 import dontsleep.application.helper.SimpleComponent;
 import dontsleep.application.helper.SimpleStage;
-import dontsleep.application.packet.CPacket.CPacketLogin;
+import dontsleep.application.packet.CPacket.CPacketRegister;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-public class LoginView extends SimpleComponent{
+public class RegisterView extends SimpleComponent{
 
-    private static LoginView instance;
-
-    @FXML
-    private Button login;
+    private static RegisterView instance;
 
     @FXML
     private TextField username;
@@ -28,12 +24,12 @@ public class LoginView extends SimpleComponent{
     @FXML
     public Text status;
 
-    public LoginView() throws IOException {
+    public RegisterView() throws IOException {
         super();
         instance = this;
     }
 
-    public static LoginView getInstance(){
+    public static RegisterView getInstance(){
         return instance;
     }
     
@@ -43,7 +39,7 @@ public class LoginView extends SimpleComponent{
         instance = null;
     }
 
-    public void handleLogin() throws IOException{
+    public void handleRegister() throws IOException{
         status.setText("");
         
         String username = this.username.getText();
@@ -53,25 +49,17 @@ public class LoginView extends SimpleComponent{
             return;
         }
 
-        CPacketLogin packet = new CPacketLogin();
+        CPacketRegister packet = new CPacketRegister();
         packet.username = username;
         packet.password = password;
-        packet.tableId = GlobalClient.tableId;
 
         GlobalClient.client.sendPacket(packet);
 
     }
-    public void handleLoginAsGuest() throws IOException{
-        CPacketLogin packet = new CPacketLogin();
-        packet.isGuest = true;        
-        packet.tableId = GlobalClient.tableId;
-        
-        GlobalClient.client.sendPacket(packet);
-    }
 
-    public void handleRegister() throws IOException{
+    public void handleLogin() throws IOException{
         close();
-        new SimpleStage(new RegisterView());
+        new SimpleStage(new LoginView());
     }
     
 }

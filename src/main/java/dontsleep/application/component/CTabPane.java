@@ -30,8 +30,8 @@ public class CTabPane extends SimpleComponent{
             billDetailTab = new BillDetailTab();
             addTab(billDetailTab, "Bill");
 
-            historyTab = new HistoryTab();
-            addTab(historyTab, "History");
+            // historyTab = new HistoryTab();
+            // addTab(historyTab, "History");
         }
         if (GlobalClient.user.isStaff()) {
             billDetailTab = new BillDetailTab();
